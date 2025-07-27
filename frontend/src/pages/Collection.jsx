@@ -34,6 +34,12 @@ const Collection = () => {
       }
     }
 
+    const appyFilter = () => {
+      let productCopy = [...products];
+      if (selectedCategory.length > 0) {
+        productCopy = productCopy.filter(product => selectedCategory.includes(product.category));
+      }
+    }
    
 
   return (
