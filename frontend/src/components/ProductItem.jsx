@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { Link } from 'react-router-dom';
 
 const ProductItem = ({ id, image, name, price }) => {
-  const { currency } = useContext(ShopContext);
+  // const { currency } = useContext(ShopContext);
 
   return (
     <>
@@ -12,7 +12,7 @@ const ProductItem = ({ id, image, name, price }) => {
           <img src={image[0]} alt={name} className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105" />
         </div>
         <h3 className='text-lg font-medium'>{name}</h3>
-        <p className='text-gray-400'>{price}</p>
+        <p className='text-gray-400'>${price}</p>
       </Link>
     </>
   )

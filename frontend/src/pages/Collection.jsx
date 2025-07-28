@@ -146,11 +146,43 @@ const Collection = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
 
+  const toggleCategory = (e) => {
+    if (category.includes(e.target.value)) {
+      setCategory(prev => prev.filter(item => item !== e.target.value));
+    }
+    else {
+      setCategory(prev => [...prev, e.target.value]);
+    }
+  }
+
+  const toggleSubCategory = (e) => {
+    if (subCategory.includes(e.target.value)) {
+      setSubCategory(prev => prev.filter(item => item !== e.target.value));
+    }
+    else {
+      setSubCategory(prev => [...prev, e.target.value]);
+    }
+  }
+
+  const applyFilter = () => {
+      let productCopy = [...products];
+      if (category.length > 0) {
+        productCopy = productCopy.filter(product => category.includes(product.category));
+      }
+
+      if (subCategory.length > 0) {
+        productCopy = productCopy.filter(product => subCategory.includes(product.subCategory));
+      }
+      setFilterProducts(productCopy);
+    }
+
   useEffect(() => {
     setFilterProducts(products);
-  }
-    , [])
+  }, [products])
 
+  useEffect(() => {
+    applyFilter();
+  }, [category, subCategory]);
 
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
@@ -165,13 +197,13 @@ const Collection = () => {
           <p className='mb-3 test-sm font-medium'>Categories</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2 cursor-pointer'>
-              <input type="checkbox" className='w-3' value={'Men'} />Men
+              <input type="checkbox" className='w-3' value={'Men'} onChange={toggleCategory} />Men
             </p>
             <p className='flex gap-2 cursor-pointer'>
-              <input type="checkbox" className='w-3' value={'Women'} />Women
+              <input type="checkbox" className='w-3' value={'Women'} onChange={toggleCategory} />Women
             </p>
             <p className='flex gap-2 cursor-pointer'>
-              <input type="checkbox" className='w-3' value={'Kids'} />Kids
+              <input type="checkbox" className='w-3' value={'Kids'} onChange={toggleCategory} />Kids
             </p>
           </div>
         </div>
@@ -180,13 +212,13 @@ const Collection = () => {
           <p className='mb-3 test-sm font-medium'>Sub Categories</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2 cursor-pointer'>
-              <input type="checkbox" className='w-3' value={'Top Wear'} />Top Wear
+              <input type="checkbox" className='w-3' value={'Topwear'} onChange={toggleSubCategory} />Top Wear
             </p>
             <p className='flex gap-2 cursor-pointer'>
-              <input type="checkbox" className='w-3' value={'Bottom Wear'} />Bottom Wear
+              <input type="checkbox" className='w-3' value={'Bottomwear'} onChange={toggleSubCategory} />Bottom Wear
             </p>
             <p className='flex gap-2 cursor-pointer'>
-              <input type="checkbox" className='w-3' value={'Winter wear'} />Winter wear
+              <input type="checkbox" className='w-3' value={'Winterwear'} onChange={toggleSubCategory} />Winter wear
             </p>
           </div>
         </div>
@@ -206,7 +238,7 @@ const Collection = () => {
 
         {/* map products */}
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-          {filterProducts.map((item,index) => (
+          {filterProducts.map((item, index) => (
             <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} />
           ))}
         </div>
