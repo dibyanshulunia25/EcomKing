@@ -77,16 +77,16 @@
 //           <h4 className='text-md font-semibold text-center p-2 mb-2'>Sub Category</h4>
 //           <div className='flex flex-col gap-2 pl-[120px] p-2'>
 //             <label>
-//               <input type="checkbox" className='mr-2' value={'T-Shirts'} onChange={toggleSubCategory} />
-//               T-Shirts
+//               <input type="checkbox" className='mr-2' value={'Top Wear'} onChange={toggleSubCategory} />
+//               Top Wear
 //             </label>
 //             <label>
-//               <input type="checkbox" className='mr-2' value={'Jeans'} onChange={toggleSubCategory} />
-//               Jeans
+//               <input type="checkbox" className='mr-2' value={'Bottom Wear'} onChange={toggleSubCategory} />
+//               Bottom Wear
 //             </label>
 //             <label>
-//               <input type="checkbox" className='mr-2' value={'Jackets'} onChange={toggleSubCategory} />
-//               Jackets
+//               <input type="checkbox" className='mr-2' value={'Winter wear'} onChange={toggleSubCategory} />
+//               Winter wear
 //             </label>
 //           </div>
 //         </div>
@@ -134,6 +134,8 @@
 
 import { useContext, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
+import { assets } from '../assets/assets';
+import Title from '../components/Title';
 
 const Collection = () => {
 
@@ -144,15 +146,48 @@ const Collection = () => {
 
       {/* Filter options */}
       <div className='min-w-60 mx-10'>
-        <p className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS</p>
+        <p onClick={() => setShowFilter(!showFilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS
+          <img className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} src={assets.dropdown_icon} alt="" />
+        </p>
         {/* Category filter */}
         <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
-          
+          <p className='mb-3 test-sm font-medium'>Categories</p>
+            <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
+              <p className='flex gap-2 cursor-pointer'>
+                <input type="checkbox" className='w-3' value={'Men'} />Men
+              </p>
+              <p className='flex gap-2 cursor-pointer'>
+                <input type="checkbox" className='w-3' value={'Women'} />Women
+              </p>
+              <p className='flex gap-2 cursor-pointer'>
+                <input type="checkbox" className='w-3' value={'Kids'} />Kids
+              </p>
+            </div>
+        </div>
+        {/* Sub category filter */}
+        <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
+          <p className='mb-3 test-sm font-medium'>Sub Categories</p>
+          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
+            <p className='flex gap-2 cursor-pointer'>
+              <input type="checkbox" className='w-3' value={'Top Wear'} />Top Wear
+            </p>
+            <p className='flex gap-2 cursor-pointer'>
+              <input type="checkbox" className='w-3' value={'Bottom Wear'} />Bottom Wear
+            </p>
+            <p className='flex gap-2 cursor-pointer'>
+              <input type="checkbox" className='w-3' value={'Winter wear'} />Winter wear
+            </p>
+          </div>
         </div>
       </div>
 
+      {/*Right side Products list */}
+      <div className='flex-1'>
+        <div className='flex justify-between text-base sm:text-2xl mb-4'>
+          <Title text1={'ALL'} text2={"collections"}></Title>
+        </div>
+      </div>
     </div>
   )
 }
-
 export default Collection
