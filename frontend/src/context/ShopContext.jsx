@@ -7,7 +7,7 @@ const ShopContextProvider = ({ children }) => {
     const currency = '₹'; // Define the currency symbol you want to use
     const delivery_fee = 50; // Define the delivery charges
     const [search,setSearch] = useState('');
-    const [showSearch,setShowSearch] = useState(true);
+    const [showSearch,setShowSearch] = useState(false);
 
     const contextValue = {
         products, currency, delivery_fee, search, setSearch, showSearch, setShowSearch

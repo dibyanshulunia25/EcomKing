@@ -140,7 +140,7 @@ import ProductItem from '../components/ProductItem';
 
 const Collection = () => {
 
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -167,6 +167,11 @@ const Collection = () => {
 
   const applyFilter = () => {
     let productCopy = [...products];
+
+    if (search) {
+      productCopy = productCopy.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
+    }
+
     if (category.length > 0) {
       productCopy = productCopy.filter(product => category.includes(product.category));
     }
@@ -199,14 +204,14 @@ const Collection = () => {
   useEffect(() => {
     applyFilter();
     // sortProducts();
-  }, [category, subCategory]);
+  }, [category, subCategory, search, products]);
 
   useEffect(() => {
     sortProducts();
   }, [sortType]);
 
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10'>
 
       {/* Filter options */}
       <div className='min-w-50 mx-10'>
