@@ -37,11 +37,11 @@ const Product = () => {
           <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18%] w-full">
             {
               productData.image.map((img, index) => (
-                <img onClick={() => setImage(img)} key={index} src={img} alt={`Product Image ${index + 1}`} className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"/>
+                <img onClick={() => setImage(img)} key={index} src={img} alt={`Product Image ${index + 1}`} className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer" />
               ))}
           </div>
           <div className="w-full sm:w-[80%]">
-              <img className="w-full h-auto" src={image}></img>
+            <img className="w-full h-auto" src={image}></img>
           </div>
         </div>
 
@@ -66,10 +66,19 @@ const Product = () => {
                 <button onClick={() => setSize(item)} key={index} className={`border border-gray-300 px-4 py-2 rounded-md transition-colors ${size === item ? "bg-gray-500" : "bg-gray-100"}`}>{item}</button>
               ))}
             </div>
-            </div>
           </div>
-
+          <button className="uppercase bg-black text-white mt-4 py-2 px-4 rounded-md text-sm active:bg-gray-700">Add to cart</button>
+          <hr className="mt-8 sm:w-4/8 text-gray-200" />
+          <div className="text-sm text-gray-500 mt-4 flex flex-col gap-1">
+            <p className="upper text-gray-400 text-md font-medium">100% original product</p>
+            <p className="upper text-gray-400 text-md font-medium">Free returns</p>
+            <p className="upper text-gray-400 text-md font-medium">Secure payments</p>
+          </div>
+        </div>
       </div>
+       
+
+
     </div>
   ) : <div className="opacity-0"></div>
 }
