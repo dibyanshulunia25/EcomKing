@@ -24,7 +24,7 @@ const Latest = () => {
             {latestProducts.map((product) => (
                 <div key={product.id} className='border border-gray-300 rounded-md p-3 flex flex-col gap-3 items-center'>
                     <div className='border border-gray-100 shadow-xl shadow-[#f4e5b86a] rounded-2xl bg-[#FAF9F6]'>
-                        <img src={product.image} alt={product.name} className='h-50 w-auto rounded-2xl' />
+                        <img src={product.image[0]} alt={product.name} className='h-50 w-auto rounded-2xl' />
                     </div>
                     <h3 className='text-lg font-semibold'>{product.name}</h3>
                     <p className='text-gray-500'>${product.price}</p>
