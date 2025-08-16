@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { ShopContext } from '../context/ShopContext';
 import Title from './Title';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Latest = () => {
     const {products} = useContext(ShopContext);
@@ -20,8 +21,10 @@ const Latest = () => {
             </p>
         </div>
         {/* rendering items */}
+        
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 px-5">
             {latestProducts.map((product) => (
+                <Link className='text-gray-700 cursor-pointer' to={`/product/${product._id}`}>
                 <div key={product.id} className='border border-gray-300 rounded-md p-3 flex flex-col gap-3 items-center'>
                     <div className='border border-gray-100 shadow-xl shadow-[#f4e5b86a] rounded-2xl bg-[#FAF9F6]'>
                         <img src={product.image[0]} alt={product.name} className='h-50 w-auto rounded-2xl' />
@@ -29,6 +32,7 @@ const Latest = () => {
                     <h3 className='text-lg font-semibold'>{product.name}</h3>
                     <p className='text-gray-500'>${product.price}</p>
                 </div>
+        </Link>
             ))}
         </div>
     </div>
