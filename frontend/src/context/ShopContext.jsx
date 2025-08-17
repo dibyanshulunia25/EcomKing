@@ -54,8 +54,18 @@ const ShopContextProvider = ({ children }) => {
         return totalCount;
     }
 
+    const updateQuantity= async (itemId,size,quantity)=>{
+        let cartData = structuredClone(cartItems);
+
+        if (cartData[itemId] && cartData[itemId][size]) {
+            cartData[itemId][size] = quantity;
+        }
+
+        setCartItems(cartData);
+    }
+
     const contextValue = {
-        products, currency, delivery_fee, search, setSearch, showSearch, setShowSearch,cartItems,addToCart,getCartCount
+        products, currency, delivery_fee, search, setSearch, showSearch, setShowSearch,cartItems,addToCart,getCartCount,updateQuantity
     };
 
     return (
